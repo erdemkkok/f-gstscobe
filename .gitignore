@@ -1,0 +1,5 @@
+build/
+build-deb/
+dist/
+__pycache__/
+*.pyc

@@ -1,0 +1,56 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+
+permissions:
+  contents: write
+
+jobs:
+  deb:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: arm64
+            runner: ubuntu-24.04-arm
+          - arch: amd64
+            runner: ubuntu-24.04
+    runs-on: ${{ matrix.runner }}
+    # build on the oldest target (JetPack 5 = Ubuntu 20.04, GStreamer 1.16)
+    # so the same .deb installs on 20.04 / 22.04 / 24.04
+    container: ubuntu:20.04
+    steps:
+      - name: deps
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run: |
+          apt-get update -qq
+          apt-get install -y -qq build-essential meson ninja-build pkg-config \
+            libgstreamer1.0-dev gstreamer1.0-tools gstreamer1.0-plugins-base \
+            python3 python3-gi gir1.2-gstreamer-1.0 git ca-certificates
+      - uses: actions/checkout@v4
+      - name: set version from tag
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: echo "${GITHUB_REF_NAME#v}" > VERSION
+      - name: build
+        run: ./scripts/build-deb.sh
+      - name: smoke test
+        run: |
+          apt-get install -y -qq ./dist/*.deb || true
+          dpkg -i dist/*.deb || apt-get install -y -qq -f
+          gst-inspect-1.0 scope | grep -q gstscope
+          gstscope --version
+          python3 -c "import sys; sys.path.insert(0,'/usr/lib/gstscope'); import gstscope.server, gstscope.collector"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gstscope-${{ matrix.arch }}
+          path: dist/*.deb
+      - name: release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*.deb

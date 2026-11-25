@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+if [ -d /run/systemd/system ]; then
+    systemctl stop gstscope.service >/dev/null 2>&1 || true
+    if [ "$1" = "remove" ]; then
+        systemctl disable gstscope.service >/dev/null 2>&1 || true
+    fi
+fi
+exit 0

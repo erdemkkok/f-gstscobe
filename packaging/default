@@ -1,0 +1,11 @@
+# /etc/default/gstscope  -  restart after editing:  sudo systemctl restart gstscope
+
+# web UI / API
+GSTSCOPE_BIND=0.0.0.0
+GSTSCOPE_PORT=8090
+
+# set a token to protect the UI/API:  http://<board>:8090/?token=<token>
+GSTSCOPE_TOKEN=
+
+# unix socket the tracer reports to (keep in sync with GSTSCOPE_SOCKET in traced apps)
+GSTSCOPE_SOCKET=/run/gstscope/gstscope.sock

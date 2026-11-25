@@ -1,0 +1,15 @@
+Package: gstscope
+Version: @VERSION@
+Architecture: @ARCH@
+Maintainer: Erdem <erdemkkok@users.noreply.github.com>
+Installed-Size: @SIZE@
+Depends: python3 (>= 3.8), python3-gi, gir1.2-gstreamer-1.0, libgstreamer1.0-0 (>= 1.16), gstreamer1.0-plugins-base, gstreamer1.0-plugins-good
+Recommends: gstreamer1.0-plugins-bad, gstreamer1.0-tools
+Section: video
+Priority: optional
+Homepage: https://github.com/erdemkkok/gstscope
+Description: GStreamer pipeline profiler and RTSP stream checker
+ gstscope traces running GStreamer pipelines (per-element processing time,
+ per-link fps/bitrate, queue fill, QoS drops, errors) through a tracer plugin
+ and checks RTSP cameras/DVRs (codec, fps, bitrate, GOP, jitter, reconnects).
+ Everything is shown in a web UI served from the board.
