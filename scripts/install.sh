@@ -1,7 +1,7 @@
 #!/bin/sh
-# gstscope installer:  curl -fsSL https://raw.githubusercontent.com/erdemkkok/gstscope/main/scripts/install.sh | sudo sh
+# gstscope installer:  curl -fsSL https://raw.githubusercontent.com/erdemkkok/f-gstscobe/main/scripts/install.sh | sudo sh
 set -eu
-REPO="erdemkkok/gstscope"
+REPO="erdemkkok/f-gstscobe"
 
 [ "$(id -u)" -eq 0 ] || { echo "please run as root (sudo)"; exit 1; }
 command -v apt-get >/dev/null || { echo "apt-based distro required"; exit 1; }

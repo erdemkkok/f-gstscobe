@@ -31,7 +31,7 @@ Everything is served from the board itself: open `http://<board-ip>:8090`.
 ## Install
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/erdemkkok/gstscope/main/scripts/install.sh | sudo sh
+curl -fsSL https://raw.githubusercontent.com/erdemkkok/f-gstscobe/main/scripts/install.sh | sudo sh
 ```
 
 or download the `.deb` for your architecture (`arm64` / `amd64`) from Releases and `sudo apt install ./gstscope_*.deb`.

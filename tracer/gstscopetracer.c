@@ -1158,4 +1158,4 @@ plugin_init (GstPlugin * plugin)
 
 GST_PLUGIN_DEFINE (GST_VERSION_MAJOR, GST_VERSION_MINOR, scope,
     "gstscope pipeline profiler tracer", plugin_init, GSTSCOPE_VERSION,
-    "MIT/X11", "gstscope", "https://github.com/erdemkkok/gstscope")
+    "MIT/X11", "gstscope", "https://github.com/erdemkkok/f-gstscobe")
